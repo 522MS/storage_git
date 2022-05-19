@@ -1,0 +1,45 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+    {% include 'includes/main_menu.html' %}
+    <div>
+        <h1>Пользователи</h1>
+        <div>
+            <div>
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Имя пользователя</th>
+                            <th>Имя</th>
+                            <th>Адрес эл. почты</th>
+                            <th>Удалить</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in objects %}
+                            <tr>
+                                <td><a href="{% url 'authapp:user_update' user.id %}" style="color: dodgerblue">{{ user.username }}</a></td>
+                                <td>{{ user.first_name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    <a href="{% url 'authapp:user_delete' pk=user.id %}">удалить</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <a href="{% url 'authapp:register' %}">
+                    <button>Создать пользователя</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

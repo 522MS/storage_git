@@ -1,0 +1,16 @@
+<ul>
+    <li><a href="{% url 'index' %}">Главная</a></li>
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'mainapp:files' %}">Хранилище</a></li> Вы авторизованы. Можете пользоваться хранилищем
+        {% if user.is_superuser %}
+        <li><a href="{% url 'auth:user_read' %}">Пользователи</a></li>Вы администратор. Можете управлять пользователями
+        {% endif %}
+    {% endif %}
+    <li>
+        {% if user.is_authenticated %}
+        <a href="{% url 'auth:logout' %}">выйти</a>
+        {% else %}
+        <a href="{% url 'auth:login' %}">войти</a>
+        {% endif %}
+    </li>
+</ul>

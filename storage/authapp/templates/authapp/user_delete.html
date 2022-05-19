@@ -1,0 +1,21 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    Уверены, что хотите удалить {{ object.username }}
+        {% if object.first_name %}
+            ({{ object.first_name|title }})
+        {% endif %}
+    ?
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="удалить">
+    </form>
+    <button>
+        <a href="{% url 'authapp:user_read' %}">
+        Отмена
+        </a>
+    </button>
+</div>
+{% endblock %}

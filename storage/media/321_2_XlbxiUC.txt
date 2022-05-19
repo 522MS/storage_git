@@ -1,0 +1,36 @@
+hostname BottomRouter
+interface FastEthernet0/0
+ ip address 192.168.4.1 255.255.255.0
+ no sh
+interface FastEthernet1/0
+ ip address 172.21.0.1 255.255.0.0
+ no sh
+interface FastEthernet4/0
+ ip address 172.19.0.1 255.255.0.0
+ no sh
+end
+wr
+
+
+en
+conf t
+hostname RightRouter
+interface FastEthernet0/0
+ ip address 192.168.3.1 255.255.255.0
+ no sh
+interface FastEthernet1/0
+ ip address 172.22.0.2 255.255.0.0
+ no sh
+interface FastEthernet4/0
+ ip address 172.19.0.2 255.255.0.0
+ no sh
+end
+wr
+
+ip route 192.168.2.0 255.255.255.0 172.17.0.1 
+ip route 192.168.3.0 255.255.255.0 172.22.0.2 
+
+
+
+
+
