@@ -1,48 +1,33 @@
-<!DOCTYPE html>
+{% extends 'mainapp/base.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django File Upload</title>
-    <style>
-        table {
-            width: 100%;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    {% include 'includes/main_menu.html' %}
-    <form action="{% url 'mainapp:search' %}" method="get">
-      <input name="q" type="text" placeholder="Search...">
-    </form>
+{% block content %}
+<form action="{% url 'mainapp:search' %}" method="get">
+    <input style="width: 30%" class="form-control" name="q" type="text" placeholder="Для поиска ведите id или название файла">
+</form>
+<br>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Download</th>
-            <th>Extension</th>
-            <th>Delete</th>
-        </tr>
-        {% for file in objects %}
-            <tr>
-                <td>{{ file.pk }}</td>
-                <td><a href="{% url 'mainapp:file_read' file.id %}">{{ file.uploadedFile }}</a></td>
-                <td><a download="" href="media/{{ file.uploadedFile }}">скачать</a></td>
-                <td>{{ file.title }}</td>
-                <td>
-                    <a href="{% url 'mainapp:file_delete' file.id %}">удалить</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Download</th>
+        <th>Extension</th>
+        <th>Delete</th>
+    </tr>
+    {% for file in objects %}
+    <tr>
+        <td>{{ file.pk }}</td>
+        <td><a href="{% url 'mainapp:file_read' file.id %}">{{ file.uploadedFile }}</a></td>
+        <td><a download="" href="media/{{ file.uploadedFile }}">скачать</a></td>
+        <td>{{ file.title }}</td>
+        <td>
+            <a href="{% url 'mainapp:file_delete' file.id %}">удалить</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
 
-    <a href="{% url 'mainapp:file_create'%}">
-        <button>Загрузить файл</button>
-    </a>
-
-</body>
-</html>
+<a href="{% url 'mainapp:file_create'%}">
+    <button>Загрузить файл</button>
+</a>
+{% endblock %}
