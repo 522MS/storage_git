@@ -1,13 +1,16 @@
-{% include 'includes/main_menu.html' %}
-<table>
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+<table class="table table-bordered">
     <tr>
         <th>ID</th>
-        <th>Title</th>
+        <th>Name</th>
         <th>Extension</th>
     </tr>
     <tr>
         <td>{{ file.id }}</td>
-        <td>{{ file.title}}</td>
+        <td>{{ file.uploadedFile }}</td>
         <td>{{ file.title }}</td>
     </tr>
 </table>
+{% endblock %}

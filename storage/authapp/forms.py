@@ -8,11 +8,21 @@ class UserLoginForm(AuthenticationForm):
         model = StorageUser
         fields = ('username', 'password')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
 
 class UserRegisterForm(UserCreationForm):
     class Meta:
         model = StorageUser
         fields = ('username', 'first_name', 'password1', 'password2', 'email', 'age',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
 
 
 class ShopUserEditForm(UserChangeForm):
